@@ -1,4 +1,4 @@
-cat << EOF > README.md
+
 # E. coli Prediction through Genome Sequences
 
 A Django project with a single app, \`myapp\`, designed to predict the presence of *E. coli* in a given DNA sequence using a machine learning model. Users can input a genome sequence via a web interface, and the application returns a prediction indicating whether *E. coli* is detected ("Detected" for positive, "Not Detected" for negative). The project features a modern, biology-themed interface with client-side validation and responsive design. All project files were generated programmatically using a Python script (\`project.py\`) outside the main project.
