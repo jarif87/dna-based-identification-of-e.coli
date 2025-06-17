@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E. coli Genome Predictor</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <canvas id="dnaCanvas" class="dna-canvas"></canvas>
+        <header>
+            <h1><i class="fas fa-dna"></i> E. coli Genome Predictor</h1>
+            <p>Analyze DNA sequences to detect E. coli with cutting-edge AI.</p>
+        </header>
+        <div class="card">
+            <form method="POST" action="" id="genome-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="genome">Enter DNA Sequence</label>
+                    <input type="text" id="genome" name="Name" class="searchTerm" 
+                           placeholder="e.g., ATCG..." required>
+                    <div class="examples">
+                        <p>Example: <span>ttaacattaataaataaggaggctctaatggcactcattagccaatcaatcaagaac</span></p>
+                        <p>Example: <span>ttactagcaatacgcttgcgttcggtggttaagtatgtataatgcgcgggcttgtcg</span></p>
+                    </div>
+                    <p id="error-message" class="error hidden"></p>
+                </div>
+                <button type="submit" name="pred_button" class="searchButton">
+                    <span class="btn-text">Predict</span>
+                    <i class="fas fa-dna"></i>
+                </button>
+            </form>
+            {% if response is not None %}
+                <div class="result animate-result">
+                    <h2>E. coli Presence: 
+                        <span class="{{ response|yesno:'positive,negative' }}">
+                            <i class="fas fa-{{ response|yesno:'virus,check-circle' }}"></i>
+                            {{ response|yesno:'Detected,Not Detected' }}
+                        </span>
+                    </h2>
+                </div>
+            {% endif %}
+        </div>
+        <footer>
+            <p>Powered by <a href="https://x.ai" target="_blank">xAI</a> & Django | Designed by Sadik Al Jarif</p>
+        </footer>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
