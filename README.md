@@ -1,33 +1,44 @@
+E. coli Prediction via Genome Sequences
+=======================================
 
-# E. coli Prediction through Genome Sequences
+A Django-based web application with a single app `myapp`, designed to predict
+the presence of E. coli in DNA sequences using a machine learning model. Users
+can input genome sequences through a web form, and the app returns a prediction:
+"Detected" if E. coli is present, or "Not Detected" otherwise. The project
+features a responsive, biology-themed interface with client-side validation.
 
-A Django project with a single app, \`myapp\`, designed to predict the presence of *E. coli* in a given DNA sequence using a machine learning model. Users can input a genome sequence via a web interface, and the application returns a prediction indicating whether *E. coli* is detected ("Detected" for positive, "Not Detected" for negative). The project features a modern, biology-themed interface with client-side validation and responsive design. All project files were generated programmatically using a Python script (\`project.py\`) outside the main project.
+All project files were generated using a Python script named `project.py`
+outside the main project directory.
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Setup Instructions](#setup-instructions)
-- [Usage](#usage)
-- [Dependencies](#dependencies)
-- [File Generation](#file-generation)
-- [Contributing](#contributing)
-- [License](#license)
+Table of Contents
+-----------------
+- Overview
+- Features
+- Project Structure
+- Setup Instructions
+- Usage
+- Dependencies
+- File Generation
+- Contributing
+- License
 
-## Overview
-This Django application leverages a pre-trained machine learning model to predict *E. coli* presence based on genome sequences. The backend uses Django to handle form submissions, process sequences with a \`OneHotEncoder\` (stored in \`onehotencoder.pkl\`), and make predictions using a model defined in \`sustain.py\`. The frontend features a clean, responsive interface with client-side validation to ensure input sequences contain only valid nucleotides (A, T, C, G).
+Overview
+--------
+This Django application uses a pre-trained machine learning model to detect
+E. coli from DNA sequences. Input sequences are encoded with a OneHotEncoder
+(`onehotencoder.pkl`) and passed to the prediction model (`sustain.py`).
+The frontend includes responsive design and JavaScript-based input validation.
 
-All project files, including Django configurations, static files, and templates, were generated using a Python script (\`project.py\`) outside the main project directory, streamlining the setup process.
+Features
+--------
+- Predicts E. coli presence from raw DNA input
+- Client-side validation (accepts only A, T, C, G)
+- Modern responsive web UI
+- Encoded DNA inputs using a OneHotEncoder
+- Uses Django framework for routing and views
 
-## Features
-- **Genome Prediction**: Predicts *E. coli* presence from DNA sequences using a machine learning model.
-- **User-Friendly Interface**: Modern, biology-themed design with a centered form and clear result display.
-- **Client-Side Validation**: Ensures input sequences contain only A, T, C, G (case-insensitive) using JavaScript.
-- **Responsive Design**: Adapts to desktops, tablets, and mobile devices.
-- **Static File Support**: Serves CSS and JavaScript for styling and interactivity.
-- **Django Backend**: Robust handling of form submissions and model predictions.
-
-## Project Structure
+Project Structure
+-----------------
 ```
 myproject/
 ├── manage.py
@@ -51,90 +62,69 @@ myproject/
 │   ├── sustain.py
 │   ├── migrations/
 │   │   ├── __init__.py
-│   │   ├── 0001_initial.py
+│   │   └── 0001_initial.py
 │   ├── static/
-│   │   ├── css/
-│   │   │   ├── style.css
-│   │   ├── js/
-│   │   │   ├── script.js
-│   │   ├── images/
+│   │   ├── css/style.css
+│   │   ├── js/script.js
+│   │   └── images/
 │   └── templates/
-│       ├── index.html
+│       └── index.html
+
 ```
-
-- **myproject/**: Project settings and configuration.
-- **myapp/**: Main application with views, models, and templates.
-  - \`views.py\`: Handles form submissions and model predictions.
-  - \`sustain.py\`: Defines the machine learning model.
-  - \`onehotencoder.pkl\`: Pre-trained \`OneHotEncoder\` for data preprocessing.
-  - \`static/\`: CSS, JS, and image assets.
-  - \`templates/\`: HTML templates, including \`index.html\` for the prediction interface.
-
-## Setup Instructions
-1. **Clone the Repository**:
-   \`\`\`bash
+Setup Instructions
+------------------
+1. Clone the repository:
    git clone https://github.com/your-username/e-coli-prediction.git
    cd e-coli-prediction
-   \`\`\`
 
-2. **Create and Activate a Virtual Environment**:
-   \`\`\`bash
+2. Create and activate a virtual environment:
    python -m venv venv
-   source venv/bin/activate  # On Windows: .\venv\Scripts\activate
-   \`\`\`
+   source venv/bin/activate         # On Windows: .\venv\Scripts\activate
 
-3. **Install Dependencies**:
-   \`\`\`bash
+3. Install dependencies:
    pip install -r requirements.txt
-   \`\`\`
 
-4. **Run Migrations**:
-   \`\`\`bash
+4. Run migrations:
    python manage.py migrate
-   \`\`\`
 
-5. **Collect Static Files**:
-   \`\`\`bash
+5. Collect static files:
    python manage.py collectstatic
-   \`\`\`
 
-6. **Start the Server**:
-   \`\`\`bash
+6. Start the server:
    python manage.py runserver
-   \`\`\`
 
-7. **Access the Application**:
-   Open your browser and navigate to \`http://127.0.0.1:8000/\`.
+7. Open the app in your browser:
+   http://127.0.0.1:8000/
 
-## Usage
-1. **Homepage**:
-   - Visit \`http://127.0.0.1:8000/\` to access the prediction form.
-   - Enter a DNA sequence (e.g., \`ttactagcaatacgcttgcgttcggtggttaagtatgtataatgcgcgggcttgtcg\`).
-   - The form validates that the sequence contains only A, T, C, G (case-insensitive).
-   - Submit the form to receive a prediction: "Detected" (E. coli present) or "Not Detected" (E. coli absent).
+Usage
+-----
+- Visit: http://127.0.0.1:8000/
+- Input a DNA sequence (only A, T, C, G characters)
+- Submit to receive a result: "Detected" or "Not Detected"
 
-2. **Alternative URL**:
-   - Access \`http://127.0.0.1:8000/home/\` for the same form and functionality.
-   - Admin interface available at \`http://127.0.0.1:8000/admin/\` (requires superuser login: \`python manage.py createsuperuser\`).
+Alternative URL:
+- http://127.0.0.1:8000/home/
+- Admin panel: http://127.0.0.1:8000/admin/ (requires superuser login)
 
-3. **Example Sequences**:
-   - \`ttaacattaataaataaggaggctctaatggcactcattagccaatcaatcaagaac\`
-   - \`ttactagcaatacgcttgcgttcggtggttaagtatgtataatgcgcgggcttgtcg\`
+Example DNA Sequences:
+- ttaacattaataaataaggaggctctaatggcactcattagccaatcaatcaagaac
+- ttactagcaatacgcttgcgttcggtggttaagtatgtataatgcgcgggcttgtcg
 
-## Dependencies
-Key dependencies are listed in \`requirements.txt\`. Install them using:
-\`\`\`bash
-pip install -r requirements.txt
-\`\`\`
-
-Main dependencies include:
+Dependencies
+------------
+Main dependencies (from requirements.txt):
 - Django==5.2.3
 - pandas
 - scikit-learn
 - numpy
-- tensorflow (if used by the model in \`sustain.py\`)
+- tensorflow (if used in sustain.py)
 
-Ensure all dependencies are compatible with Python 3.11.
+Ensure compatibility with Python 3.11.
 
-## File Generation
-All project files, including Django configurations (\`settings.py\`, \`urls.py\`), application logic (\`views.py\`, \`sustain.py\`), static files (\`style.css\`, \`script.js\`), and templates (\`index.html\`), were generated programmatically using a Python script named \`project.py\`. This script, located outside the main project directory, automated the creation of the project structure and files to streamline development.
+File Generation
+---------------
+All Django files, templates, and static assets were generated using the
+Python script `project.py` located outside the main project directory.
+This script automates setup and file creation for rapid deployment.
+
+
