@@ -28,7 +28,7 @@ All project files, including Django configurations, static files, and templates,
 - **Django Backend**: Robust handling of form submissions and model predictions.
 
 ## Project Structure
-\`\`\`
+```
 myproject/
 ├── manage.py
 ├── requirements.txt
@@ -60,7 +60,7 @@ myproject/
 │   │   ├── images/
 │   └── templates/
 │       ├── index.html
-\`\`\`
+```
 
 - **myproject/**: Project settings and configuration.
 - **myapp/**: Main application with views, models, and templates.
